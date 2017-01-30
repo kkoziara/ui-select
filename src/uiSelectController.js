@@ -216,6 +216,15 @@ uis.controller('uiSelectCtrl',
     }
 
     ctrl.refreshItems = function (data){
+      if (data && data.length > 0 && ctrl.items && ctrl.items.length > 0) {
+        if (ctrl.items[0].isTag) {
+          var  dataNew = [ctrl.items[0]];
+          for (var i=0; i < data.length; ++i) {
+            dataNew.push(data[i]);
+          }
+          data = dataNew;
+        }
+      }
       data = data || ctrl.parserResult.source($scope);
       var selectedItems = ctrl.selected;
       //TODO should implement for single mode removeSelected
